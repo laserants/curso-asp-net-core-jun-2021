@@ -9,5 +9,7 @@ namespace Movies.Core.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public int Year { get; set; }
+        public int Rating { get; set; }
+        public List<Character> Characters { get; set; } = new List<Character>();
     }
 }
