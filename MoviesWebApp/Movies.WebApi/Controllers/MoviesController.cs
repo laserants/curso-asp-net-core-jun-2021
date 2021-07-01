@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Movies.Core.Interfaces;
+using Movies.Infrastructure.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,18 @@ namespace Movies.WebApi.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
+        private readonly IMovieRepository _movieRepository;
+
+        public MoviesController(IMovieRepository movieRepository)
+        {
+            _movieRepository = movieRepository;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetMoviesAsync()
         {
-            return Ok();
+            var movies = await _movieRepository.GetMoviesAsync();
+            return Ok(movies);
         }
     }
 }
