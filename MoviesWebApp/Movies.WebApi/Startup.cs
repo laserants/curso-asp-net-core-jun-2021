@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Movies.Core.Interfaces;
+using Movies.Infrastructure.DataAccess;
 using Movies.Infrastructure.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,9 @@ namespace Movies.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DbConnection");
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlite(connectionString));
             services.AddTransient<IMovieRepository, MovieSampleRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
