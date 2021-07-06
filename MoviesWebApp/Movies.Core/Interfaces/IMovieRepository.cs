@@ -8,6 +8,9 @@ namespace Movies.Core.Interfaces
 {
     public interface IMovieRepository
     {
-        Task<IEnumerable<Movie>> GetMoviesAsync();
+        Task<IEnumerable<Movie>> GetMoviesAsync(Movie entity);
+        Task<Movie> GetMovieAsync(int id);
+        Task<Movie> AddMovieAsync(Movie entity);
+        Task<Movie> UpdateMovieAsync(Movie entity);
     }
 }
