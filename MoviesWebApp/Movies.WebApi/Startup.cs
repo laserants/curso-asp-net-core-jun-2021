@@ -33,7 +33,7 @@ namespace Movies.WebApi
             var connectionString = Configuration.GetConnectionString("DbConnection");
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlite(connectionString));
-            services.AddTransient<IMovieRepository, MovieSampleRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
