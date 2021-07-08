@@ -24,6 +24,18 @@ namespace Movies.Infrastructure.DataAccess.Repositories
             return result.Entity;
         }
 
+        public async Task<Movie> DeleteMovieAsync(int id)
+        {
+            var result = await _dbContext.Movies.FirstOrDefaultAsync(m => m.Id == id);
+            if (result != null)
+            {
+                _dbContext.Movies.Remove(result);
+                await _dbContext.SaveChangesAsync();
+                return result;
+            }
+            return null;
+        }
+
         public async Task<Movie> GetMovieAsync(int id)
         {
             return await _dbContext.Movies.Include(m => m.Characters.OrderBy(c => c.Id).ThenBy(c => c.Name)).FirstOrDefaultAsync(m => m.Id == id);

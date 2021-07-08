@@ -12,5 +12,6 @@ namespace Movies.Core.Interfaces
         Task<Movie> GetMovieAsync(int id);
         Task<Movie> AddMovieAsync(Movie entity);
         Task<Movie> UpdateMovieAsync(Movie entity);
+        Task<Movie> DeleteMovieAsync(int id);
     }
 }

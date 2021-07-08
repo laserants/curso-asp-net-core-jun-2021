@@ -14,6 +14,11 @@ namespace Movies.Infrastructure.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<Movie> DeleteMovieAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Movie> GetMovieAsync(int id)
         {
             throw new NotImplementedException();
