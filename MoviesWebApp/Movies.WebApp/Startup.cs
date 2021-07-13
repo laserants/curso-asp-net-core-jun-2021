@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Movies.Core.Interfaces;
+using Movies.Infrastructure.DataAccess;
+using Movies.Infrastructure.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +27,11 @@ namespace Movies.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            var connectionString = Configuration.GetConnectionString("DbConnection");
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlite(connectionString));
             services.AddControllersWithViews();
         }
 
