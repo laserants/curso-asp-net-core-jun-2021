@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Movies.Core.Constants;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,5 +22,7 @@ namespace Movies.WebApp.Models
         [Range(0, 100, ErrorMessage = "La calificacion debe ser entre 0 y 100")]
         [Display(Name = "Calificacion")]
         public int Rating { get; set; }
+        [Display(Name = "Satisfaccion")]
+        public SatisfactionEnum Satisfaction { get; set; }
     }
 }

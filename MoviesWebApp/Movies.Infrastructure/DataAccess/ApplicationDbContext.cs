@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Movies.Core.Entities;
+using Movies.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,11 @@ namespace Movies.Infrastructure.DataAccess
                 new Movie { Id = 4, Title = "Gemini Man", Year = 2019, Rating = 40 },
                 new Movie { Id = 5, Title = "Downton Abbey", Year = 2020, Rating = 65 }
             };
+
+            foreach (var movie in movies)
+            {
+                movie.Satisfaction = movie.GetMovieSatisfaction();
+            }
 
             var characters = new Character[]
             {

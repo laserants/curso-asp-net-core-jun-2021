@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Movies.Core.Entities;
+using Movies.Core.Helpers;
 using Movies.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Movies.Infrastructure.DataAccess.Repositories
 
         public async Task<Movie> AddMovieAsync(Movie entity)
         {
+            entity.Satisfaction = entity.GetMovieSatisfaction();
             var result = await _dbContext.Movies.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return result.Entity;
@@ -55,6 +57,7 @@ namespace Movies.Infrastructure.DataAccess.Repositories
             var result = await _dbContext.Movies.FirstOrDefaultAsync(m => m.Id == entity.Id);
             if (result != null)
             {
+                result.Satisfaction = entity.GetMovieSatisfaction();
                 result.Title = entity.Title;
                 result.Year = entity.Year;
                 result.Rating = entity.Rating;
