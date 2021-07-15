@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Movies.Core.Constants;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,5 +12,6 @@ namespace Movies.Core.Entities
         public int Year { get; set; }
         public int Rating { get; set; }
         public List<Character> Characters { get; set; } = new List<Character>();
+        public SatisfactionEnum Satisfaction { get; set; }
     }
 }

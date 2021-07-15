@@ -20,10 +20,11 @@ namespace Movies.WebApp.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var movies = await _movieRepository.GetMoviesAsync(null);
-            var moviesViewModel = _mapper.Map<IEnumerable<MovieViewModel>>(movies);
+            var movie = string.IsNullOrEmpty(searchString) ? null : new Movie { Title = searchString };
+            var movies = await _movieRepository.GetMoviesAsync(movie);
+            var moviesViewModel = _mapper.Map<IEnumerable<MovieViewModel>>(movies).ToList().OrderByDescending(m => m.Rating);
             return View(moviesViewModel);
         }
 
