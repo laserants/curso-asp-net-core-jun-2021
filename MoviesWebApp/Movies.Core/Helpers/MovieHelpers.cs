@@ -13,7 +13,7 @@ namespace Movies.Core.Helpers
             return movie.Rating switch
             {
                 int n when (n < 0) => SatisfactionEnum.NA,
-                int n when (n <= 30 && n >= 0) => SatisfactionEnum.Terrible,
+                int n when (n <= 20 && n >= 0) => SatisfactionEnum.Terrible,
                 int n when (n <= 40 && n >= 21) => SatisfactionEnum.Mala,
                 int n when (n <= 60 && n >= 41) => SatisfactionEnum.Normal,
                 int n when (n <= 80 && n >= 61) => SatisfactionEnum.Buena,
